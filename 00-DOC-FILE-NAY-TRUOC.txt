@@ -1,0 +1,176 @@
+╔════════════════════════════════════════════════════════════════╗
+║                                                                ║
+║          🌸 WEB CHÚC MỪNG 8/3 - HOÀN TẤT! 🌸                 ║
+║                                                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+✅ ĐÃ TẠO THÀNH CÔNG:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📄 CÁC FILE WEB:
+   ├── start.html           → Trang nhập tên (trang đầu tiên)
+   ├── confirm.html         → Trang Yes/No (No không bấm được!)
+   └── celebration.html     → Trang chúc mừng cá nhân hóa
+
+📖 CÁC FILE HƯỚNG DẪN:
+   ├── BAT_DAU.md          → Hướng dẫn nhanh (ĐỌC FILE NÀY TRƯỚC!)
+   ├── HUONG_DAN.md        → Hướng dẫn chi tiết đầy đủ
+   └── tu-chinh-code.js    → Code mẫu để tùy chỉnh cho 50 người
+
+🎵 FILE ĐA PHƯƠNG TIỆN:
+   ├── bear-hug2.webp       → Ảnh mặc định
+   ├── Cupid.mp3            → Nhạc mặc định 1
+   └── Where-Is-My-Husband.mp3 → Nhạc mặc định 2
+
+🔧 FILE HỖ TRỢ:
+   └── chay-web.sh          → Script tự động chạy web
+
+
+╔════════════════════════════════════════════════════════════════╗
+║                    🚀 CÁCH CHẠY WEB NGAY                       ║
+╚════════════════════════════════════════════════════════════════╝
+
+📍 Bước 1: Mở Terminal
+   cd /media/armon/minhquan/E_DRIVE/PL-learning/lovely
+
+📍 Bước 2: Chạy lệnh (Chọn 1 trong 2 cách)
+
+   🔹 CÁCH 1: Dùng Script (Đơn giản nhất)
+      ./chay-web.sh
+
+   🔹 CÁCH 2: Dùng lệnh trực tiếp
+      python3 -m http.server 8080
+
+📍 Bước 3: Mở trình duyệt
+   Truy cập: http://localhost:8080/start.html
+
+📍 Bước 4: Dừng server
+   Nhấn: Ctrl + C
+
+
+╔════════════════════════════════════════════════════════════════╗
+║                    🎯 FLOW HOẠT ĐỘNG                           ║
+╚════════════════════════════════════════════════════════════════╝
+
+1️⃣ Trang start.html
+   ↓ Người dùng nhập tên
+   ↓ Hệ thống lưu tên
+   ↓ Bấm "Tiếp tục"
+
+2️⃣ Trang confirm.html
+   ↓ Hiển thị: "Chào [Tên]!"
+   ↓ Hỏi: "Bạn có muốn nhận món quà không?"
+   ↓ Nút "Không" → KHÔNG BẤM ĐƯỢC (nó chạy lung tung! 😄)
+   ↓ Nút "Có" → Bấm vào
+
+3️⃣ Trang celebration.html
+   ✨ Hiển thị trang chúc mừng đặc biệt
+   ✨ Có ảnh động, nhạc nền, hiệu ứng pháo hoa
+   ✨ Tùy chỉnh ảnh + nhạc riêng cho từng người
+
+
+╔════════════════════════════════════════════════════════════════╗
+║              🎨 TÙY CHỈNH CHO 50 NGƯỜI                         ║
+╚════════════════════════════════════════════════════════════════╝
+
+📂 Bước 1: Chuẩn bị file
+   ├── Tạo thư mục:
+   │   mkdir images music
+   │
+   ├── Copy 50 ảnh vào images/:
+   │   images/huong.jpg
+   │   images/lan.jpg
+   │   images/mai.jpg
+   │   ... (47 ảnh nữa)
+   │
+   └── Copy 50 bài hát vào music/:
+       music/song1.mp3
+       music/song2.mp3
+       music/song3.mp3
+       ... (47 bài nữa)
+
+💻 Bước 2: Sửa code
+   ├── Mở file: celebration.html
+   ├── Tìm dòng: <script>
+   ├── Copy code từ file: tu-chinh-code.js
+   └── Paste vào NGAY SAU dòng <script>
+
+✅ Bước 3: Test
+   ├── Chạy web: python3 -m http.server 8080
+   ├── Nhập tên: "Hương"
+   └── Kiểm tra: Ảnh + nhạc của Hương có hiện đúng không?
+
+
+╔════════════════════════════════════════════════════════════════╗
+║                   📚 TÀI LIỆU THAM KHẢO                        ║
+╚════════════════════════════════════════════════════════════════╝
+
+📘 BAT_DAU.md           → Đọc đầu tiên (hướng dẫn nhanh)
+📗 HUONG_DAN.md         → Hướng dẫn chi tiết từng bước
+📙 tu-chinh-code.js     → Code mẫu sẵn để copy-paste
+📕 README.md            → Mô tả dự án
+
+
+╔════════════════════════════════════════════════════════════════╗
+║                    🐛 XỬ LÝ LỖI                                ║
+╚════════════════════════════════════════════════════════════════╝
+
+❌ Lỗi: "Connection refused"
+   ✅ Kiểm tra: Server có đang chạy không?
+   ✅ Chạy lại: python3 -m http.server 8080
+
+❌ Lỗi: Ảnh không hiện
+   ✅ Kiểm tra: Đường dẫn file ảnh
+   ✅ Kiểm tra: Tên file có đúng không (phân biệt hoa/thường)
+
+❌ Lỗi: Nhạc không chạy
+   ✅ Kiểm tra: File mp3 có tồn tại không
+   ✅ Kiểm tra: Định dạng file (phải là .mp3)
+   ✅ Thử: Chuyển sang file nhạc khác
+
+❌ Lỗi: Trang trắng
+   ✅ Mở: F12 → Console → Xem lỗi
+   ✅ Kiểm tra: Code có lỗi cú pháp không
+
+
+╔════════════════════════════════════════════════════════════════╗
+║                     💡 MẸO QUAN TRỌNG                          ║
+╚════════════════════════════════════════════════════════════════╝
+
+✨ Test với 3-5 người trước khi làm đủ 50 người
+✨ Đặt tên file ảnh/nhạc giống tên người (dễ quản lý)
+✨ Backup toàn bộ thư mục lovely trước khi sửa code
+✨ Tên trong code PHẢI GIỐNG tên người dùng nhập
+✨ Kiểm tra kỹ trên Chrome/Firefox trước khi deploy
+
+
+╔════════════════════════════════════════════════════════════════╗
+║                   🎯 CHECKLIST TRƯỚC KHI DÙNG                  ║
+╚════════════════════════════════════════════════════════════════╝
+
+□ Đã test chạy web thành công
+□ Đã nhập tên và thấy trang confirm
+□ Nút "Không" không bấm được
+□ Bấm "Có" ra trang celebration
+□ Ảnh và nhạc hiển thị đúng
+□ Test trên nhiều trình duyệt
+□ Đã chuẩn bị đủ 50 ảnh + 50 bài nhạc
+□ Đã sửa code trong celebration.html
+□ Đã test với 3-5 tên khác nhau
+□ Mọi thứ hoạt động hoàn hảo!
+
+
+╔════════════════════════════════════════════════════════════════╗
+║                    🌸 CHÚC BẠN THÀNH CÔNG! 🌸                  ║
+╚════════════════════════════════════════════════════════════════╝
+
+Nếu có bất kỳ vấn đề gì, hãy:
+1. Đọc lại file BAT_DAU.md
+2. Đọc file HUONG_DAN.md
+3. Kiểm tra Console của trình duyệt (F12)
+4. Thử với code mẫu trong tu-chinh-code.js
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          Made with 💖 for International Women's Day
+              Chúc mừng ngày Quốc tế Phụ nữ 8/3!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=no">
+    <title>💕 Một câu hỏi đặc biệt 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            font-family: 'Georgia', serif;
+            position: relative;
+        }
+
+        /* Confetti Canvas */
+        #confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Floating Background */
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-item {
+            position: absolute;
+            animation: float-around 15s ease-in-out infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes float-around {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(10deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(30px) rotate(-10deg); }
+        }
+
+        /* Emoji Rain */
+        .emoji-rain {
+            position: fixed;
+            top: -50px;
+            font-size: 25px;
+            z-index: 1;
+            animation: rain-fall 8s linear;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        @keyframes rain-fall {
+            0% { top: -50px; opacity: 1; }
+            100% { top: 100vh; opacity: 0; }
+        }
+
+        /* Decorative elements */
+        .decoration {
+            position: fixed;
+            font-size: 40px;
+            opacity: 0.7;
+            animation: gentle-float 4s ease-in-out infinite;
+            z-index: 5;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+        }
+
+        .deco-1 { top: 5%; left: 3%; animation-delay: 0s; }
+        .deco-2 { top: 8%; right: 5%; animation-delay: 0.5s; }
+        .deco-3 { bottom: 10%; left: 5%; animation-delay: 1s; }
+        .deco-4 { bottom: 8%; right: 3%; animation-delay: 1.5s; }
+        .deco-5 { top: 50%; left: 2%; animation-delay: 2s; }
+        .deco-6 { top: 45%; right: 2%; animation-delay: 2.5s; }
+
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* Main Card */
+        .card {
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            border-radius: 30px;
+            padding: 50px 60px;
+            text-align: center;
+            box-shadow: 
+                0 25px 60px rgba(0,0,0,0.5),
+                0 0 80px rgba(255,105,180,0.15);
+            border: 2px solid rgba(255,105,180,0.5);
+            position: relative;
+            z-index: 10;
+            animation: card-appear 1s ease-out;
+            max-width: 650px;
+            width: 95%;
+        }
+
+        @keyframes card-appear {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff6b6b, #ff69b4, #a855f7, #ff1493, #ff6b6b);
+            border-radius: 32px;
+            z-index: -1;
+            animation: glow-border 4s linear infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes glow-border {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .big-heart {
+            font-size: 80px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 30px rgba(255,105,180,0.8));
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .big-heart:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            40% { transform: scale(1); }
+            60% { transform: scale(1.1); }
+        }
+
+        .title {
+            font-size: 2.2rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 
+                0 0 20px rgba(255,105,180,1),
+                0 0 40px rgba(168,85,247,0.8);
+        }
+
+        .name-highlight {
+            background: linear-gradient(135deg, #ffd700, #ffaa00, #fff176);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-style: italic;
+            font-weight: bold;
+            filter: drop-shadow(0 0 15px rgba(255,215,0,0.8));
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #b8b8d1;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .question {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(255,105,180,0.8);
+            background: linear-gradient(135deg, rgba(168,85,247,0.2) 0%, rgba(255,105,180,0.15) 100%);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,105,180,0.3);
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-family: 'Georgia', serif;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff1493 50%, #ff69b4 100%);
+            color: white;
+            box-shadow: 
+                0 8px 25px rgba(255,105,180,0.4),
+                0 0 0 0 rgba(255,105,180,0.7);
+            animation: yes-pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 100;
+        }
+
+        @keyframes yes-pulse {
+            0%, 100% {
+                box-shadow: 
+                    0 8px 25px rgba(255,105,180,0.4),
+                    0 0 0 0 rgba(255,105,180,0.7);
+            }
+            50% {
+                box-shadow: 
+                    0 12px 35px rgba(255,105,180,0.6),
+                    0 0 20px 8px rgba(255,105,180,0.3);
+            }
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 12px 35px rgba(255,105,180,0.6),
+                0 0 50px rgba(255,105,180,0.4);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #4a4a6a 0%, #6a6a8a 100%);
+            color: white;
+            transition: all 0.15s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 99;
+        }
+
+        .btn-no:hover {
+            cursor: not-allowed;
+        }
+
+        .love-note {
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 1px solid rgba(255,105,180,0.2);
+            color: #c8c8e0;
+            font-size: 1rem;
+            font-style: italic;
+            background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(255,105,180,0.08) 100%);
+            border-radius: 12px;
+        }
+
+        .love-note span {
+            color: #fff694;
+            font-weight: bold;
+        }
+
+        /* Hover Message */
+        .hover-message {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff1493 0%, #a855f7 100%);
+            color: #ffffff;
+            padding: 18px 35px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+            box-shadow: 
+                0 10px 40px rgba(168,85,247,0.5),
+                0 0 20px rgba(255,105,180,0.3);
+            border: 2px solid rgba(255,255,255,0.3);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .hover-message.show {
+            opacity: 1;
+            animation: bounce-message 0.5s ease;
+        }
+
+        @keyframes bounce-message {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .card { padding: 30px 25px; }
+            .title { font-size: 1.6rem; }
+            .question { font-size: 1.3rem; padding: 15px 20px; }
+            .btn { padding: 15px 35px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Floating Background -->
+    <div class="floating-bg" id="floatingBg"></div>
+
+    <!-- Small Decorative Elements -->
+    <div class="decoration deco-1">🌸</div>
+    <div class="decoration deco-2">🌺</div>
+    <div class="decoration deco-3">🌷</div>
+    <div class="decoration deco-4">🌹</div>
+    <div class="decoration deco-5">💐</div>
+    <div class="decoration deco-6">✨</div>
+
+    <!-- Main Card -->
+    <div class="card">
+        <div class="big-heart">💖</div>
+        <h1 class="title">
+            Chào <span class="name-highlight" id="userName"></span>!
+        </h1>
+        <p class="subtitle">Một câu hỏi đặc biệt dành cho bạn...</p>
+        
+        <div class="question" id="questionText">
+            Đang tải...
+        </div>
+
+        <div class="buttons-container">
+            <button id="yesBtn" class="btn btn-yes" onclick="sayYes()">Có! ❤️</button>
+            <button id="noBtn" class="btn btn-no" onmouseover="runAway()">Không</button>
+        </div>
+    </div>
+
+    <!-- Hover Message -->
+    <div class="hover-message" id="hoverMessage">
+        Nope! Nút đó không hoạt động! 😜💕
+    </div>
+
+    <!-- Load celebration data -->
+    <script src="celebration-data.js"></script>
+    <script>
+        // ========== CONFETTI SYSTEM ==========
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const confettiColors = ['#ff69b4', '#ff1493', '#a855f7', '#ffb6c1', '#ff85a2', '#ffd700', '#ffffff', '#ee82ee', '#da70d6'];
+        const confettiShapes = ['circle', 'square', 'heart', 'star'];
+        
+        let confettiParticles = [];
+
+        class Confetti {
+            constructor(fromCenter = false) {
+                this.reset(fromCenter);
+            }
+
+            reset(fromCenter = false) {
+                if (fromCenter) {
+                    this.x = canvas.width / 2 + (Math.random() - 0.5) * 100;
+                    this.y = canvas.height / 2;
+                    this.speedY = Math.random() * 15 - 12;
+                    this.speedX = Math.random() * 20 - 10;
+                } else {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * -canvas.height;
+                    this.speedY = Math.random() * 0.5 + 0.2;
+                    this.speedX = Math.random() * 0.8 - 0.3;
+                }
+                this.size = Math.random() * 10 + 5;
+                this.color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                this.shape = confettiShapes[Math.floor(Math.random() * confettiShapes.length)];
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 10 - 5;
+                this.wobble = Math.random() * 10;
+                this.wobbleSpeed = Math.random() * 0.1;
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.wobble) * 0.3;
+                this.rotation += this.rotationSpeed;
+                this.wobble += this.wobbleSpeed;
+                this.speedY += 0.005;
+
+                if (this.y > canvas.height + 50) {
+                    this.reset(false);
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.fillStyle = this.color;
+
+                switch (this.shape) {
+                    case 'circle':
+                        ctx.beginPath();
+                        ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                        break;
+                    case 'square':
+                        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                        break;
+                    case 'heart':
+                        this.drawHeart();
+                        break;
+                    case 'star':
+                        this.drawStar();
+                        break;
+                }
+
+                ctx.restore();
+            }
+
+            drawHeart() {
+                const size = this.size;
+                ctx.beginPath();
+                ctx.moveTo(0, size / 4);
+                ctx.bezierCurveTo(size / 2, -size / 4, size / 2, -size / 2, 0, -size / 4);
+                ctx.bezierCurveTo(-size / 2, -size / 2, -size / 2, -size / 4, 0, size / 4);
+                ctx.fill();
+            }
+
+            drawStar() {
+                const spikes = 5;
+                const outerRadius = this.size / 2;
+                const innerRadius = this.size / 4;
+                
+                ctx.beginPath();
+                for (let i = 0; i < spikes * 2; i++) {
+                    const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                    const angle = (i * Math.PI) / spikes - Math.PI / 2;
+                    const x = Math.cos(angle) * radius;
+                    const y = Math.sin(angle) * radius;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function createConfetti(count = 80) {
+            for (let i = 0; i < count; i++) {
+                const particle = new Confetti(false);
+                particle.y = Math.random() * canvas.height;
+                confettiParticles.push(particle);
+            }
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            confettiParticles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animateConfetti);
+        }
+
+        function burstConfetti() {
+            for (let i = 0; i < 60; i++) {
+                confettiParticles.push(new Confetti(true));
+            }
+            
+            if (confettiParticles.length > 300) {
+                confettiParticles = confettiParticles.slice(-300);
+            }
+        }
+
+        // ========== FLOATING BACKGROUND ==========
+        function createFloatingItems() {
+            const container = document.getElementById('floatingBg');
+            const items = ['💕', '💖', '💗', '✨', '💫', '🦋', '🌸', '💜'];
+
+            for (let i = 0; i < 20; i++) {
+                const item = document.createElement('div');
+                item.className = 'floating-item';
+                item.innerHTML = items[Math.floor(Math.random() * items.length)];
+                item.style.left = Math.random() * 100 + 'vw';
+                item.style.top = Math.random() * 100 + 'vh';
+                item.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                item.style.animationDelay = Math.random() * 5 + 's';
+                item.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(item);
+            }
+        }
+
+        // ========== EMOJI RAIN ==========
+        function startEmojiRain() {
+            const emojis = ['💕', '💖', '🌸', '✨', '💫', '🦋', '💗', '🌺'];
+            
+            setInterval(() => {
+                const emoji = document.createElement('div');
+                emoji.className = 'emoji-rain';
+                emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                emoji.style.left = Math.random() * 100 + 'vw';
+                emoji.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                document.body.appendChild(emoji);
+                
+                setTimeout(() => emoji.remove(), 8000);
+            }, 600);
+        }
+
+        // ========== HEART CLICK ANIMATION ==========
+        document.querySelector('.big-heart').addEventListener('click', function() {
+            burstConfetti();
+        });
+
+        // Get name from localStorage
+        const userName = localStorage.getItem('userName') || 'Bạn';
+        document.getElementById('userName').textContent = userName;
+        
+        // Get user data and display personalized question
+        const userData = getCelebrationData(userName);
+        const questionElement = document.getElementById('questionText');
+        if (userData && userData.question) {
+            questionElement.textContent = userData.question;
+        } else {
+            questionElement.textContent = 'Bạn có muốn nhận món quà đặc biệt ngày 8/3 không? 💝';
+        }
+
+        // No button logic
+        let runAwayCount = 0;
+        let messageTimeout = null;
+
+        const funnyMessages = [
+            "Ơ, nút đó không bấm được đâu! 😄",
+            "Thử lại đi, nhưng mà... vẫn không được đâu! 🤭",
+            "Haha! Nó trốn rồi! 😝",
+            "Không có cửa đâu nha! 💕",
+            "Bạn chỉ có một lựa chọn thôi! ✨",
+            "Thôi đi, bấm YES đi! 💖",
+            "Nút NO đã bị vô hiệu hóa! 🎉",
+            "Chỉ có YES là đúng thôi! 🌸"
+        ];
+
+        function runAway() {
+            const noBtn = document.getElementById('noBtn');
+            const message = document.getElementById('hoverMessage');
+            
+            // Get button dimensions
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            
+            // Calculate safe boundaries (with padding for mobile)
+            const padding = 20; // Padding from screen edges
+            const maxX = window.innerWidth - btnWidth - padding;
+            const maxY = window.innerHeight - btnHeight - padding;
+            
+            // Random position within safe boundaries
+            const randomX = Math.max(padding, Math.random() * maxX);
+            const randomY = Math.max(padding, Math.random() * maxY);
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+            noBtn.style.transition = 'all 0.3s ease';
+            
+            // Show random message
+            message.textContent = funnyMessages[runAwayCount % funnyMessages.length];
+            message.classList.add('show');
+            
+            runAwayCount++;
+            
+            // Hide message after 2 seconds
+            if (messageTimeout) clearTimeout(messageTimeout);
+            messageTimeout = setTimeout(() => {
+                message.classList.remove('show');
+            }, 2000);
+            
+            // Make No button more transparent each time (but never disappear)
+            if (runAwayCount > 2) {
+                const opacity = Math.max(0.7, 1 - (runAwayCount * 0.1));
+                noBtn.style.opacity = opacity;
+            }
+        }
+
+        function sayYes() {
+            // Create heart burst effect
+            createHeartBurst();
+            
+            // Burst confetti
+            burstConfetti();
+            
+            // Save user choice
+            localStorage.setItem('userChoice', 'yes');
+            
+            // Redirect after animation (1 second)
+            setTimeout(() => {
+                window.location.href = 'celebration-dynamic-full.html';
+            }, 1000);
+        }
+
+        function createHeartBurst() {
+            // Add heart burst effect when clicking Yes
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.textContent = '💖';
+                    heart.style.position = 'fixed';
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+                    heart.style.fontSize = (Math.random() * 20 + 30) + 'px';
+                    heart.style.pointerEvents = 'none';
+                    heart.style.zIndex = '9999';
+                    document.body.appendChild(heart);
+                    
+                    const angle = (Math.PI * 2 * i) / 30;
+                    const velocity = Math.random() * 3 + 5;
+                    let posX = 0;
+                    let posY = 0;
+                    
+                    const animation = setInterval(() => {
+                        posX += Math.cos(angle) * velocity;
+                        posY += Math.sin(angle) * velocity;
+                        heart.style.transform = `translate(${posX}px, ${posY}px) rotate(${posX * 2}deg)`;
+                        heart.style.opacity = parseFloat(heart.style.opacity || 1) - 0.015;
+                        
+                        if (parseFloat(heart.style.opacity) <= 0) {
+                            clearInterval(animation);
+                            heart.remove();
+                        }
+                    }, 20);
+                }, i * 30);
+            }
+        }
+
+        // ========== INITIALIZE EVERYTHING ==========
+        function init() {
+            // Create initial confetti
+            createConfetti(80);
+            animateConfetti();
+            
+            // Create floating background items
+            createFloatingItems();
+            
+            // Start emoji rain
+            startEmojiRain();
+
+            // Initial confetti burst on page load
+            setTimeout(() => {
+                burstConfetti();
+            }, 300);
+        }
+
+        // Run initialization when page loads
+        init();
+    </script>
+</body>
+</html>

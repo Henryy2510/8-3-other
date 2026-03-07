@@ -1,0 +1,208 @@
+═══════════════════════════════════════════════════════════════
+          🌸 DEMO NHANH - WEB CHÚC MỪNG 8/3 🌸
+═══════════════════════════════════════════════════════════════
+
+📋 BẠN ĐÃ CÓ TẤT CẢ CÁC FILE SAU:
+
+✅ FILE WEB:
+   🔹 start.html          → Trang 1: Nhập tên
+   🔹 confirm.html        → Trang 2: Yes/No (No không bấm được!)
+   🔹 celebration.html    → Trang 3: Trang chúc mừng
+
+✅ FILE TÀI LIỆU:
+   📘 00-DOC-FILE-NAY-TRUOC.txt  → ĐỌC FILE NÀY TRƯỚC!
+   📗 BAT_DAU.md                  → Hướng dẫn nhanh
+   📙 HUONG_DAN.md                → Hướng dẫn chi tiết
+
+✅ FILE HỖ TRỢ:
+   💻 tu-chinh-code.js            → Code mẫu để tùy chỉnh
+   📝 list-50-nguoi.js            → Danh sách 50 người mẫu
+   🚀 chay-web.sh                 → Script chạy web tự động
+
+
+═══════════════════════════════════════════════════════════════
+              🎯 DEMO NGAY BÂY GIỜ (4 BƯỚC)
+═══════════════════════════════════════════════════════════════
+
+BƯỚC 1: Mở Terminal
+------------------------------------------------------------------------
+cd /media/armon/minhquan/E_DRIVE/PL-learning/lovely
+
+
+BƯỚC 2: Chạy Web Server (Chọn 1 trong 2 cách)
+------------------------------------------------------------------------
+🔸 Cách 1 - Dùng script (Đơn giản):
+   ./chay-web.sh
+
+🔸 Cách 2 - Dùng lệnh trực tiếp:
+   python3 -m http.server 8080
+
+
+BƯỚC 3: Mở Trình Duyệt
+------------------------------------------------------------------------
+Truy cập: http://localhost:8080/start.html
+
+
+BƯỚC 4: Test Thử
+------------------------------------------------------------------------
+1. Nhập tên: "Mai"
+2. Bấm "Tiếp tục ✨"
+3. Thử bấm nút "Không" → Nó sẽ chạy lung tung! 😄
+4. Bấm nút "Có ❤️"
+5. Xem trang chúc mừng với hiệu ứng đẹp!
+
+
+═══════════════════════════════════════════════════════════════
+                🎨 FLOW HOẠT ĐỘNG CỦA WEB
+═══════════════════════════════════════════════════════════════
+
+    ┌─────────────────┐
+    │  start.html     │  ← Người dùng nhập tên
+    │  (Nhập tên)     │
+    └────────┬────────┘
+             │ Bấm "Tiếp tục"
+             ▼
+    ┌─────────────────┐
+    │  confirm.html   │  ← Hiển thị: "Chào [Tên]!"
+    │  (Yes/No)       │  ← Nút "Không" không bấm được!
+    └────────┬────────┘
+             │ Bấm "Có"
+             ▼
+    ┌─────────────────┐
+    │ celebration.html│  ← Trang chúc mừng đặc biệt
+    │  (Chúc mừng)    │  ← Ảnh + Nhạc + Hiệu ứng
+    └─────────────────┘
+
+
+═══════════════════════════════════════════════════════════════
+          🔧 TÙY CHỈNH CHO 50 NGƯỜI (3 BƯỚC)
+═══════════════════════════════════════════════════════════════
+
+BƯỚC 1: Chuẩn bị file ảnh và nhạc
+------------------------------------------------------------------------
+mkdir images music
+
+# Copy 50 ảnh vào thư mục images/
+cp /path/to/anh1.jpg images/huong.jpg
+cp /path/to/anh2.jpg images/lan.jpg
+... (48 ảnh nữa)
+
+# Copy 50 bài nhạc vào thư mục music/
+cp /path/to/nhac1.mp3 music/song1.mp3
+cp /path/to/nhac2.mp3 music/song2.mp3
+... (48 bài nữa)
+
+
+BƯỚC 2: Sửa file celebration.html
+------------------------------------------------------------------------
+1. Mở file: celebration.html
+2. Tìm dòng: <script>  (khoảng dòng 1170)
+3. Mở file: tu-chinh-code.js
+4. Copy TOÀN BỘ code từ tu-chinh-code.js
+5. Paste vào celebration.html NGAY SAU dòng <script>
+6. Thay danh sách personData bằng danh sách trong list-50-nguoi.js
+
+
+BƯỚC 3: Test với từng tên
+------------------------------------------------------------------------
+1. Chạy web: python3 -m http.server 8080
+2. Nhập tên: "Hương" → Kiểm tra ảnh + nhạc
+3. Nhập tên: "Lan" → Kiểm tra ảnh + nhạc
+4. Nhập tên: "Mai" → Kiểm tra ảnh + nhạc
+...
+50. Nhập tên: "Trinh" → Kiểm tra ảnh + nhạc
+
+
+═══════════════════════════════════════════════════════════════
+                  📝 VÍ DỤ CODE TÙY CHỈNH
+═══════════════════════════════════════════════════════════════
+
+// Thêm code này vào đầu <script> của celebration.html:
+
+const userName = localStorage.getItem('userName') || 'Bạn';
+
+const personData = {
+    'Hương': { 
+        image: 'images/huong.jpg', 
+        music: 'music/song1.mp3' 
+    },
+    'Lan': { 
+        image: 'images/lan.jpg', 
+        music: 'music/song2.mp3' 
+    },
+    // ... Thêm 48 người nữa
+    'default': { 
+        image: 'bear-hug2.webp', 
+        music: 'Cupid.mp3' 
+    }
+};
+
+const currentPerson = personData[userName] || personData['default'];
+
+window.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.hug-gif').src = currentPerson.image;
+    const music = document.getElementById('bgMusic');
+    music.innerHTML = '<source src="' + currentPerson.music + '" type="audio/mpeg">';
+    music.load();
+});
+
+
+═══════════════════════════════════════════════════════════════
+                    🐛 XỬ LÝ LỖI NHANH
+═══════════════════════════════════════════════════════════════
+
+❌ Lỗi: Port 8080 đang được sử dụng
+   ✅ Dùng port khác: python3 -m http.server 8888
+
+❌ Lỗi: Ảnh không hiện
+   ✅ Kiểm tra đường dẫn: images/ten-file.jpg
+   ✅ Kiểm tra tên file có đúng không (phân biệt hoa/thường)
+
+❌ Lỗi: Nhạc không chạy
+   ✅ Dùng file mp3 khác
+   ✅ Kiểm tra đường dẫn: music/ten-bai.mp3
+
+❌ Lỗi: Trang trắng
+   ✅ Mở Console: F12 → Console → Xem lỗi
+   ✅ Kiểm tra code có lỗi cú pháp không
+
+
+═══════════════════════════════════════════════════════════════
+                  ✅ CHECKLIST TRƯỚC KHI DÙNG
+═══════════════════════════════════════════════════════════════
+
+□ Server chạy thành công (python3 -m http.server 8080)
+□ Truy cập: http://localhost:8080/start.html
+□ Nhập tên và bấm "Tiếp tục"
+□ Thử bấm nút "Không" (phải không bấm được)
+□ Bấm "Có" → Ra trang celebration
+□ Ảnh và nhạc hiển thị đúng
+□ Test với 3-5 tên khác nhau
+□ Chuẩn bị đủ 50 ảnh + 50 bài nhạc
+□ Code tùy chỉnh đã thêm vào celebration.html
+□ Mọi thứ hoạt động hoàn hảo!
+
+
+═══════════════════════════════════════════════════════════════
+                    📚 ĐỌC THÊM TÀI LIỆU
+═══════════════════════════════════════════════════════════════
+
+📘 00-DOC-FILE-NAY-TRUOC.txt  → Tổng quan toàn bộ dự án
+📗 BAT_DAU.md                  → Hướng dẫn nhanh chi tiết
+📙 HUONG_DAN.md                → Hướng dẫn từng bước rõ ràng
+💻 tu-chinh-code.js            → Code mẫu sẵn để copy
+📝 list-50-nguoi.js            → Danh sách 50 người mẫu
+
+
+═══════════════════════════════════════════════════════════════
+                  🎉 SẴN SÀNG DÙNG NGAY!
+═══════════════════════════════════════════════════════════════
+
+Bây giờ bạn có thể:
+✅ Chạy web ngay để test
+✅ Tùy chỉnh cho 50 người của bạn
+✅ Deploy cho mọi người dùng vào ngày 8/3
+
+Chúc bạn thành công! 🌸💖
+
+═══════════════════════════════════════════════════════════════

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1.0, user-scalable=no">
+    <title>💐 Chúc mừng 8/3 💐</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Confetti Canvas */
+        #confettiCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Floating Background */
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-item {
+            position: absolute;
+            animation: float-around 15s ease-in-out infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes float-around {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(10deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(30px) rotate(-10deg); }
+        }
+
+        /* Decorative elements */
+        .decoration {
+            position: fixed;
+            font-size: 45px;
+            opacity: 0.7;
+            animation: gentle-float 4s ease-in-out infinite;
+            z-index: 5;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+        }
+
+        .deco-1 { top: 5%; left: 3%; animation-delay: 0s; }
+        .deco-2 { top: 8%; right: 5%; animation-delay: 0.5s; }
+        .deco-3 { bottom: 10%; left: 5%; animation-delay: 1s; }
+        .deco-4 { bottom: 8%; right: 3%; animation-delay: 1.5s; }
+
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        /* Main Content */
+        .celebration-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Big Animated Heart */
+        .mega-heart {
+            font-size: 100px;
+            animation: mega-heartbeat 1s ease-in-out infinite;
+            filter: drop-shadow(0 0 50px rgba(255,105,180,0.8));
+            margin-bottom: 20px;
+        }
+
+        @keyframes mega-heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        /* Main Message */
+        .main-message {
+            text-align: center;
+            animation: fade-in-up 1s ease-out 0.3s both;
+        }
+
+        @keyframes fade-in-up {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .yay-text {
+            font-size: 3rem;
+            color: #ffffff;
+            text-shadow: 
+                0 0 20px rgba(255,105,180,1),
+                0 0 40px rgba(168,85,247,0.8);
+            margin-bottom: 15px;
+        }
+
+        .sub-message {
+            font-size: 1.5rem;
+            color: #c8c8e0;
+            margin-bottom: 30px;
+        }
+
+        /* Love Card */
+        .love-card {
+            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            border-radius: 30px;
+            padding: 45px 55px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 
+                0 25px 60px rgba(0,0,0,0.5),
+                0 0 80px rgba(255,105,180,0.15);
+            border: 2px solid rgba(255,105,180,0.4);
+            animation: fade-in-up 1s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .love-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(168,85,247,0.1),
+                transparent
+            );
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .love-title {
+            font-size: 1.7rem;
+            color: #ff69b4;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        /* Input Style */
+        .input-name {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            border: 2px solid rgba(168,85,247,0.5);
+            border-radius: 15px;
+            background: rgba(26,26,46,0.8);
+            color: #ffffff;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .input-name:focus {
+            outline: none;
+            border-color: #ff69b4;
+            box-shadow: 0 0 20px rgba(255,105,180,0.4);
+            background: rgba(26,26,46,1);
+        }
+
+        .input-name::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        @keyframes shake-input {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Button Style */
+        .action-btn {
+            padding: 15px 45px;
+            font-size: 1.2rem;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff1493 50%, #a855f7 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(255,105,180,0.4);
+            position: relative;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(255,105,180,0.5);
+        }
+
+        .action-btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        /* Error message */
+        .error-message {
+            color: #ff6b6b;
+            font-size: 1rem;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: rgba(255,107,107,0.1);
+            border: 1px solid rgba(255,107,107,0.3);
+            border-radius: 10px;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .yay-text {
+                font-size: 2rem;
+            }
+            .sub-message {
+                font-size: 1.1rem;
+            }
+            .love-card {
+                padding: 30px 25px;
+            }
+            .love-title {
+                font-size: 1.4rem;
+            }
+            .input-name {
+                font-size: 1rem;
+                padding: 12px 15px;
+            }
+            .action-btn {
+                padding: 12px 35px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Confetti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Floating Background -->
+    <div class="floating-bg" id="floatingBg"></div>
+
+    <!-- Decorative Elements -->
+    <div class="decoration deco-1">🌸</div>
+    <div class="decoration deco-2">🌺</div>
+    <div class="decoration deco-3">💐</div>
+    <div class="decoration deco-4">🌷</div>
+
+    <!-- Main Content -->
+    <div class="celebration-container">
+        <div class="mega-heart">💖</div>
+        
+        <div class="main-message">
+            <div class="yay-text">Chúc mừng 8/3!</div>
+            <div class="sub-message">Hãy nhập tên của bạn (Ví dụ: Nguyễn Văn An)</div>
+        </div>
+
+        <div class="love-card">
+            <div class="love-title">Tên của bạn:</div>
+            <input type="text" id="nameInput" class="input-name" placeholder="Nhập tên của bạn..." />
+            <button class="action-btn" onclick="submitName()">Tiếp tục ✨</button>
+            <div class="error-message" id="errorMessage">Tên sai mất ròi!</div>
+        </div>
+    </div>
+
+    <!-- Load celebration data -->
+    <script src="celebration-data.js"></script>
+    <script>
+        // Create floating items
+        function createFloatingItems() {
+            const container = document.getElementById('floatingBg');
+            const items = ['🌸', '🌺', '💐', '🌷', '🌹', '💕', '💖', '✨'];
+            
+            for (let i = 0; i < 15; i++) {
+                const item = document.createElement('div');
+                item.className = 'floating-item';
+                item.textContent = items[Math.floor(Math.random() * items.length)];
+                item.style.left = Math.random() * 100 + '%';
+                item.style.top = Math.random() * 100 + '%';
+                item.style.fontSize = (Math.random() * 20 + 30) + 'px';
+                item.style.animationDelay = Math.random() * 5 + 's';
+                item.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(item);
+            }
+        }
+
+        function submitName() {
+            const name = document.getElementById('nameInput').value.trim();
+            const errorMsg = document.getElementById('errorMessage');
+            
+            // Hide previous error
+            errorMsg.classList.remove('show');
+            
+            if (!name) {
+                errorMsg.textContent = '⚠️ Vui lòng nhập tên của bạn!';
+                errorMsg.classList.add('show');
+                return;
+            }
+            
+            // Check if name exists in database
+            if (!celebrationData[name]) {
+                errorMsg.textContent = 'Tên sai mất ròi!';
+                errorMsg.classList.add('show');
+                
+                // Shake the input
+                const input = document.getElementById('nameInput');
+                input.style.animation = 'shake-input 0.5s ease';
+                setTimeout(() => {
+                    input.style.animation = '';
+                }, 500);
+                
+                return;
+            }
+            
+            // Name is valid - save and proceed
+            localStorage.setItem('userName', name);
+            window.location.href = 'confirm.html';
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('nameInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                submitName();
+            }
+        });
+
+        // Initialize
+        createFloatingItems();
+    </script>
+</body>
+</html>
