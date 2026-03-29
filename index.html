@@ -27,17 +27,6 @@
             min-height: 100vh;
         }
 
-        /* Confetti Canvas */
-        #confettiCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
         /* Floating Background */
         .floating-bg {
             position: fixed;
@@ -185,37 +174,23 @@
             position: relative;
         }
 
-        /* Input Style */
-        .input-name {
-            width: 100%;
-            padding: 15px 20px;
-            font-size: 1.2rem;
-            border: 2px solid rgba(168,85,247,0.5);
-            border-radius: 15px;
-            background: rgba(26,26,46,0.8);
+        .welcome-message {
+            font-size: 1.3rem;
             color: #ffffff;
-            font-family: 'Georgia', serif;
-            text-align: center;
-            margin-bottom: 25px;
-            transition: all 0.3s ease;
-            position: relative;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(168,85,247,0.2) 0%, rgba(255,105,180,0.15) 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(255,105,180,0.3);
+            animation: pulse-glow 2s ease-in-out infinite;
         }
 
-        .input-name:focus {
-            outline: none;
-            border-color: #ff69b4;
-            box-shadow: 0 0 20px rgba(255,105,180,0.4);
-            background: rgba(26,26,46,1);
-        }
-
-        .input-name::placeholder {
-            color: rgba(255,255,255,0.4);
-        }
-
-        @keyframes shake-input {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255,105,180,0.3);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(255,105,180,0.5);
+            }
         }
 
         /* Button Style */
@@ -240,33 +215,6 @@
             box-shadow: 0 12px 35px rgba(255,105,180,0.5);
         }
 
-        .action-btn:active {
-            transform: translateY(-1px) scale(1.02);
-        }
-
-        /* Error message */
-        .error-message {
-            color: #ff6b6b;
-            font-size: 1rem;
-            margin-top: 15px;
-            padding: 10px 15px;
-            background: rgba(255,107,107,0.1);
-            border: 1px solid rgba(255,107,107,0.3);
-            border-radius: 10px;
-            display: none;
-            animation: shake 0.5s ease;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-
         /* Responsive */
         @media (max-width: 600px) {
             .yay-text {
@@ -281,21 +229,10 @@
             .love-title {
                 font-size: 1.4rem;
             }
-            .input-name {
-                font-size: 1rem;
-                padding: 12px 15px;
-            }
-            .action-btn {
-                padding: 12px 35px;
-                font-size: 1rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Confetti Canvas -->
-    <canvas id="confettiCanvas"></canvas>
-
     <!-- Floating Background -->
     <div class="floating-bg" id="floatingBg"></div>
 
@@ -311,14 +248,12 @@
         
         <div class="main-message">
             <div class="yay-text">Chúc mừng 8/3!</div>
-            <div class="sub-message">Hãy nhập tên của bạn (Ví dụ: Nguyễn Văn An)</div>
+            <div class="sub-message">Chúng mình có điều đặc biệt dành cho bạn nè!</div>
         </div>
 
         <div class="love-card">
-            <div class="love-title">Tên của bạn:</div>
-            <input type="text" id="nameInput" class="input-name" placeholder="Nhập tên của bạn..." />
-            <button class="action-btn" onclick="submitName()">Tiếp tục ✨</button>
-            <div class="error-message" id="errorMessage">Tên sai mất ròi!</div>
+            <div class="love-title">✨ Chào Như Trang! ✨</div>
+            <div class="welcome-message">Chúc mừng ngày 8/3! 💕</div>
         </div>
     </div>
 
@@ -343,48 +278,17 @@
             }
         }
 
-        function submitName() {
-            const name = document.getElementById('nameInput').value.trim();
-            const errorMsg = document.getElementById('errorMessage');
-            
-            // Hide previous error
-            errorMsg.classList.remove('show');
-            
-            if (!name) {
-                errorMsg.textContent = '⚠️ Vui lòng nhập tên của bạn!';
-                errorMsg.classList.add('show');
-                return;
-            }
-            
-            // Check if name exists in database
-            if (!celebrationData[name]) {
-                errorMsg.textContent = 'Tên sai mất ròi!';
-                errorMsg.classList.add('show');
-                
-                // Shake the input
-                const input = document.getElementById('nameInput');
-                input.style.animation = 'shake-input 0.5s ease';
-                setTimeout(() => {
-                    input.style.animation = '';
-                }, 500);
-                
-                return;
-            }
-            
-            // Name is valid - save and proceed
-            localStorage.setItem('userName', name);
+        // Auto-redirect for Như Trang
+        function autoRedirect() {
+            localStorage.setItem('userName', 'Như Trang');
             window.location.href = 'confirm.html';
         }
 
-        // Allow Enter key to submit
-        document.getElementById('nameInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                submitName();
-            }
-        });
-
         // Initialize
         createFloatingItems();
+
+        // Auto-redirect after 2 seconds
+        setTimeout(autoRedirect, 2000);
     </script>
 </body>
 </html>
